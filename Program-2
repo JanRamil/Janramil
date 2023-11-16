@@ -1,0 +1,38 @@
+from tkinter import *
+import tkinter as tk
+from tkinter import simpledialog
+from tkinter import messagebox
+
+def exit_program():
+    if confirmation_var.get():
+        root.destroy()
+    else:
+        tk.messagebox.showwarning(title="Error", message="Check the box if you confirm that you entered correct information.")
+        
+root = tk.Tk()
+root.title("Inputbox popup")
+
+def popup():
+    name=simpledialog.askstring(title="Name", prompt="What is your name?")
+    age=simpledialog.askinteger(title="Age", prompt="How old are you?")
+    address=simpledialog.askstring(title="Address", prompt="Please input your address")
+    label1.configure(text=str((("Mabuhay! My name is " + name))))
+    label2.configure(text=str((("I am " + str(age) + " years of age"))))
+    label3.configure(text=str((("I am from " + address))))
+label1=tk.Label(root, width=50, height=1, bg="#faeca0", font=('Courier New bold', 12))
+label2=tk.Label(root, width=50, height=1, bg="#faeca0", font=('Courier New bold', 12))
+label3=tk.Label(root, width=50, height=1, bg="#faeca0", font=('Courier New bold', 12))
+confirmation_var = tk.BooleanVar()
+confirmation_check = tk.Checkbutton(width=60, height=1, text="I confirm that all the information I entered are correct.", font=('Courier New bold', 10), bg="#faeca0", variable=confirmation_var)
+confirmation_check.grid(row=4, column=1)
+button=tk.Button(root, width=55, text="Personal Information", command=popup, bg="#ec6064", font=('Times New Roman', 12))
+button1=tk.Button(root, width=55, text="Submit",  command=exit_program, bg="#ec6064", font=('Times New Roman', 12))
+
+
+label1.grid(row=1, column=1)
+label2.grid(row=2, column=1)
+label3.grid(row=3, column=1)
+button.grid(row=0, column=1)
+button1.grid(row=5, column=1)
+
+root.mainloop()
