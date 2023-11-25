@@ -1,0 +1,68 @@
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import PhotoImage
+
+def get_quantity(apple_entry, orange_entry, quantity_window):
+    try:
+        apple_quantity = int(apple_entry.get())
+        orange_quantity = int(orange_entry.get())
+
+        apple_amount = (apple_quantity * 20)
+        orange_amount = (orange_quantity * 25) 
+        total_amount = apple_amount + orange_amount
+        
+        # result
+        result_label = tk.Label(quantity_window, text="")
+        result_label.place(relx=0.75, rely=0.7, anchor="center")
+        result_label.config(text=f"Apple Total: {apple_amount} pesos\nOrange Total: {orange_amount} pesos\nTotal: {total_amount} pesos", font=("Cooper Black", 12), bg="#F8EFE4", fg="#ffcd58")
+        
+        exit_button = tk.Button(quantity_window, text="Place Order", font=("Cooper Black", 10), bg="#F8EFE4", fg="#ff9636", command=done_button)
+        exit_button.place(relx=0.75, rely=0.78, anchor="center")
+        
+    except ValueError:
+        messagebox.showerror("Error", "Please enter valid quantities.")
+
+def done_button():
+    root.destroy()
+    
+def start_button_clicked(background_image):
+    # Tkinter GUI for getting quantities
+    quantity_window = tk.Toplevel()
+    quantity_window.title("JANRA AND FRUITS")
+    quantity_window.geometry("738x738")
+    background_label = tk.Label(quantity_window, image=background_image)
+    background_label.place(relwidth=1, relheight=1)
+
+    # Labels and entry widgets for apples and oranges
+    tk.Label(quantity_window, text="How many Apples?             ", font=("Cooper Black", 10), bg="#F8EFE4", fg="#ff9636").place(relx=0.6, rely=0.4, anchor="center")
+    apple_entry = tk.Entry(quantity_window)
+    apple_entry.place(relx=0.75, rely=0.4, anchor="center")
+
+    tk.Label(quantity_window, text="How many Oranges?             ", font=("Cooper Black", 10), bg="#F8EFE4", fg="#ff9636").place(relx=0.6, rely=0.5, anchor="center")
+    orange_entry = tk.Entry(quantity_window)
+    orange_entry.place(relx=0.75, rely=0.5, anchor="center")
+
+    # Button to calculate total amount
+    calculate_button = tk.Button(quantity_window, text="Calculate Total", font=("Cooper Black", 10), bg="#F8EFE4", fg="#ff9636",
+    command=lambda: get_quantity(apple_entry, orange_entry, quantity_window))
+    calculate_button.place(relx=0.75, rely=0.6, anchor="center")
+        
+
+# Tkinter GUI for the main window
+root = tk.Tk()
+root.title("JANRA AND FRUITS")
+root.geometry("750x750")
+
+# Set the background image for the main window
+background_image = PhotoImage(file=r"C:\Users\user\Pictures\SUYH8741.PNG")
+background_label = tk.Label(root, image=background_image)
+background_label.place(relwidth=1, relheight=1)
+
+# Create a button
+start_button = tk.Button(root, text="Buy Now Sheesh!", command=lambda: start_button_clicked(background_image), font=("Cooper Black", 14), bg="#F8EFE4", fg="#ff9636")
+
+# Pack the button to make it visible in the window
+start_button.place(relx=0.8, rely=0.5, anchor="e")
+
+# Start the Tkinter event loop
+root.mainloop()
